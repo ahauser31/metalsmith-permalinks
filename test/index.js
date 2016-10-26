@@ -154,4 +154,18 @@ describe('metalsmith-permalinks', function(){
       });
   });
 
+  it('should strip HTML tags from file metadata', function(done){
+    Metalsmith('test/fixtures/strip-html')
+      .use(permalinks({
+        stripHtml: true,
+        pattern: ':title'
+      }))
+      .build(function(err){
+        if (err) return done(err);
+        equal('test/fixtures/strip-html/expected', 'test/fixtures/strip-html/build');
+        done();
+      });
+
+  });
+
 });
